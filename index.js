@@ -1,6 +1,9 @@
 const express = require('express');
 const multer = require('multer');
 
+// Custom Functions
+const { chatGPT } = require('./OpenAI/ChatGPT.js');
+
 // Multer Config
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage });
@@ -16,7 +19,11 @@ app.post('/openai/chatgpt', upload.none(), async (req, res) => {
     return;
   }
 
-})
+  const description = req.body.description;
+  const apiData = await chatGPT(description);
+
+  res.send(apiData);
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
