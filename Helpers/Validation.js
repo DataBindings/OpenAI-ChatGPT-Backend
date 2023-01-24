@@ -1,14 +1,25 @@
 
 const ValidateDescription = (description) => {
-  const descriptionToValidate = description.replace(/[^a-zA-Z0-9]/g, '')
+  const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+  let ValidateDescription = '';
   let errorDescription = '';
   let error = false;
+
+  if (format.test(description)) {
+    errorDescription = 'Error: ChatGPT has detected special characters';
+  }
   
-  if (descriptionToValidate === '') {
+  else if (description === '') {
     errorDescription = 'Error: ChatGPT description is required';
   }
-  else if (descriptionToValidate.trim() === '') {
+
+  else if (description.trim() === '') {
     errorDescription = 'Error: ChatGPT description is blank';
+  }
+
+  else {
+    ValidateDescription = description
   }
 
   if (errorDescription !== '') {
@@ -16,7 +27,7 @@ const ValidateDescription = (description) => {
   }
 
   return {
-    validDescription: descriptionToValidate,
+    validDescription: ValidateDescription,
     errorDescription: errorDescription,
     error: error
   }

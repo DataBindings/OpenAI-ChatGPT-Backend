@@ -1,4 +1,5 @@
 const { openai } = require('./auth.js');
+const { ValidateDescription } = require('../Helpers/Validation.js');
 
 /**
  * Generates a ChatGPT response using OpenAI
@@ -9,16 +10,25 @@ const { openai } = require('./auth.js');
  * @return {Array}                  - The generated ChatGPT response or errors
  */
 const chatGPT = async ( description, maxTokens=1000, temperature=0.9 ) => {
+  const isValidDescription = ValidateDescription(description);
+
+  if (isValidDescription.error) {
+    return isValidDescription;
+  }
 
   try {
     const response = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: description,
+      prompt: isValidDescription.validDescription,
       max_tokens: parseInt(maxTokens),
       temperature: parseFloat(temperature)
     });
 
-    return response.data.choices;
+    return {
+      status: response.status,
+      response: response.data.choices,
+      useage: response.data.usage,
+    }
   }
   catch(error) {
     return error
