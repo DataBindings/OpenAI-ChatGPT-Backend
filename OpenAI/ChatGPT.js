@@ -10,18 +10,6 @@ const { openai } = require('./auth.js');
  */
 const chatGPT = async ( description, maxTokens=1000, temperature=0.9 ) => {
 
-  if (typeof description !== 'string') {
-    return 'Error: ChatGPT description must be of string type';
-  }
-
-  if (description === '') {
-    return 'Error: ChatGPT description is required';
-  }
-
-  if (description.trim() === '') {
-    return 'Error: ChatGPT description is blank';
-  }
-
   try {
     const response = await openai.createCompletion({
       model: "text-davinci-003",
