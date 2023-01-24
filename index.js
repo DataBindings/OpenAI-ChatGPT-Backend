@@ -20,7 +20,9 @@ app.post('/openai/chatgpt', upload.none(), async (req, res) => {
   }
 
   const description = req.body.description;
-  const apiData = await chatGPT(description);
+  const maxTokens = req.body.maxTokens || undefined;
+  const temperature = req.body.temperature || undefined;
+  const apiData = await chatGPT(description, maxTokens, temperature);
 
   res.send(apiData);
 });
