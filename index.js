@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 
 // Custom Functions
-const { chatGPT } = require('./OpenAI/ChatGPT.js');
+const { chatGPT } = require('./openAI/chatGPT.js');
 
 // Multer Config
 const storage = multer.memoryStorage()

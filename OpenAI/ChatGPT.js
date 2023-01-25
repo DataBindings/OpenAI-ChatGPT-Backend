@@ -1,5 +1,5 @@
 const { openai } = require('./auth.js');
-const { ValidateDescription } = require('../Helpers/Validation.js');
+const { ValidateDescription } = require('../helpers/validation.js');
 
 /**
  * Generates a ChatGPT response using OpenAI

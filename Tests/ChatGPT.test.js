@@ -1,5 +1,5 @@
-const { chatGPT } = require('../OpenAI/ChatGPT.js');
-const { ValidateDescription } = require('../Helpers/Validation.js');
+const { chatGPT } = require('../openAI/chatGPT.js');
+const { ValidateDescription } = require('../helpers/validation.js');
 
 jest.setTimeout(300000);
 
